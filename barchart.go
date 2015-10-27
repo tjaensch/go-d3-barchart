@@ -58,7 +58,7 @@ func stockvalues(w http.ResponseWriter, r *http.Request) {
 	//Write JSON to command line
 	fmt.Println(string(jsonData))
 
-	//Write JSON to HTTP response
+	//Write JSON to HTTP
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonData)
 
