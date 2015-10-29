@@ -73,6 +73,15 @@ const stats = `
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+    .barchart {
+      margin: 10px;
+    }
+    .piechart {
+      font: 10px sans-serif;
+    }
+    .piechart .arc path {
+      stroke: #fff;
+    }
     .axis path,
     .axis line {
         fill: none;
@@ -88,7 +97,13 @@ const stats = `
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 <body>
   <p>Simple D3 demo that fetches stock data from the Google Finance API with Go on the backend and displays a bar chart with D3 on the frontend. Code on <a href="https://github.com/tjaensch/go-d3-barchart" target="_blank">GitHub</a>. Thomas Jaensch 2015.</p> 
+  <div class="barchart"></div>
+
+  <p>D3 pie chart off of the same live dataset.</p>
+  <div class="piechart"></div>
 </body>
+
+<!-- Bar chart script -->
 <script>
 
 //Width and height
@@ -115,7 +130,7 @@ const stats = `
       };
       
       //Create SVG element
-      var svg = d3.select("body")
+      var svg = d3.select(".barchart")
             .append("svg")
             .attr("width", w)
             .attr("height", h);
@@ -157,6 +172,55 @@ const stats = `
          .attr("font-family", "sans-serif")
          .attr("font-size", "11px")
          .attr("fill", "white");
+});
+</script>
+
+<!-- Pie chart script -->
+<script>
+
+var width = 960,
+    height = 500,
+    radius = Math.min(width, height) / 2;
+
+var color = d3.scale.category20();
+
+var arc = d3.svg.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+var pie = d3.layout.pie()
+    .sort(null)
+    .value(function(d) { return d.l; });
+
+var svg = d3.select(".piechart").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+  .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+//Data
+  d3.json("https://go-d3-barchart.appspot.com/stockvalues", function(error, data) {
+              if (error) return console.warn(error);
+              console.log(data);
+
+  var g = svg.selectAll(".arc")
+      .data(pie(data))
+    .enter().append("g")
+      .attr("class", "arc");
+
+  g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return color(d.data.l); });
+
+  g.append("text")
+      .attr("transform", function(d) {
+            var c = arc.centroid(d);
+            return "translate(" + c[0]*1.5 + "," + c[1]*1.5 + ")";
+        })
+      .attr("dy", ".35em")
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.data.t; });
+
 });
 </script>
 `
