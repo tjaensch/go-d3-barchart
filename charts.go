@@ -111,7 +111,7 @@ const stats = `
       var h = 300;
 
 //Data
-  d3.json("https://go-d3-barchart.appspot.com/stockvalues", function(error, data) {
+  d3.json("http://localhost:8080/stockvalues", function(error, data) {
               if (error) return console.warn(error);
               console.log(data);
       
@@ -199,7 +199,7 @@ var svg = d3.select(".piechart").append("svg")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 //Data
-  d3.json("https://go-d3-barchart.appspot.com/stockvalues", function(error, data) {
+  d3.json("http://localhost:8080/stockvalues", function(error, data) {
               if (error) return console.warn(error);
               console.log(data);
 
