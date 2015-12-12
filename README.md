@@ -2,4 +2,4 @@ Simple D3 demo that fetches stock data from the Google Finance API with Go on th
 
 CD into application folder and run "go run charts.go"
 
-![charts.png](https://github.com/tjaensch/go-d3-barchart/charts.png)
+![charts.png](https://github.com/tjaensch/go-d3-barchart/blob/master/charts.png)
