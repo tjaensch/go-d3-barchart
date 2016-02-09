@@ -1,4 +1,4 @@
-Simple D3 demo that fetches stock data from the Google Finance API with Go on the backend and displays a bar and pie chart with D3 on the frontend, live here:
+Simple D3 demo that fetches stock data from the Google Finance API with Go on the backend and displays a bar and pie chart with D3 on the frontend.
 
 CD into application folder and run "go run charts.go"
 
