@@ -121,7 +121,7 @@ const stats = `
               .rangeBands([0, w], 0.05);
 
       var yScale = d3.scale.linear()
-              .domain([0, d3.max(data, function(d) { return d.l; })])
+              .domain([0, d3.max(data, function(d) { return d.l/0.95; })])
               .range([10, h]);
       
       //Define key function, to be used when binding data
